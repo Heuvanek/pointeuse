@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Liste Clients{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-12 pt-4">
+    <div class="table-responsive">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Société</th>
+            <th scope="col">Profil</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for client in clients %}
+          <tr>
+          {# {% set client.id = 1 %} #}
+            <th scope="row"><a href="{{ url('listing_mission',{id_client: 1}) }}">{{ client.society }} <br><small>{{ client.name }} {{ client.surname }}</small><a></th>
+            {# {{ post.id }} #}
+            <td>               
+<button type="submit" class="btn btn-primary btn-sm">
+                  <i class="far fa-address-card"></i>
+            </button></td>
+            {# {{ post.title }} #}
+            <td>
+              <a class="btn btn-primary btn-sm" href="">
+                {# {{ path('post_edit',{id: post.id}) }} #}
+                <i class="fas fa-edit"></i>
+              </a>
+            </td>
+            <td>
+              <form onsubmit="return confirm('sur ?');" action="" method="post">
+                {# {{ path('post_delete',{id: post.id}) }} #}
+                <input type="hidden" name="token" value="" />
+                {# {{ csrf_token('delete-post') }} #}
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
