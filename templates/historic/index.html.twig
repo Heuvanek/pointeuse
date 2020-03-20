@@ -6,96 +6,88 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
-<div>
-    <div class="form-group">
-        <div class="col-xs-5 date">
+<div class="row justify-content-center">
+    <div class="form-group col-3">
+        <div class="date">
             <div class="input-group input-append date" id="datePicker">
-                <input type="text" class="form-control" name="date" />
-                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input type="text" class="form-control" name="date" placeholder="cliquez pour choisir un mois" />
+                <span class="input-group-addon add-on"></span>
             </div>
         </div>
     </div>
 </div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+{# <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script> #}
 
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Client</th>
+            <th scope="col">Mission</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            {% for mission in missions %}
+            <th scope="row"><a href="{{ url('listing_mission',{id_client: 1}) }}" class="text-info">
+                    {{ client.society }}
+                    <br><small>{{ client.name }} {{ client.surname }}</small>
+                    <a>
+            </th>
+            {{ client.id }}
+            <td>
 
-	</div>
-</div>
-            </div>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Client</th>
-                        <th scope="col">Mission</th>
-                        <th scope="col">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for client in clients %}
-                    <tr>
-                        {# {% for mission in missions %}                         #}
-                        <th scope="row"><a href="{{ url('listing_mission',{id_client: 1}) }}">
-                        {{ client.society }}
-                                <br><small>{{ client.name }} {{ client.surname }}</small>
-                                <a>
-                                </th>
-                        {{ client.id }}
-                        <td>
-    
-                        {{ client.name }}
-                        <td>
-                        {# {{ mission.TitleMission }} #}
-
-                        </td>
-                    </tr>
-                    {# {% endfor %} #}
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                {{ mission.TitleMission  }}
+            <td>
+                {{ mission.time}}
+            </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
 {% block javascripts %}
 <script>
-$(document).ready(function() {
-    $('#datePicker')
-        .datepicker({
-            format: 'mm/dd/yyyy'
-        })
-        .on('changeDate', function(e) {
-            // Revalidate the date field
-            $('#eventForm').formValidation('revalidateField', 'date');
-        });
+    $(document).ready(function () {
+        $('#datePicker')
+            .datepicker({
+                format: 'mm/dd/yyyy',
+            })
+            .on('changeDate', function (e) {
+                // Revalidate the date field
+                $('#eventForm').formValidation('revalidateField', 'date');
+            });
 
-    $('#eventForm').formValidation({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The name is required'
-                    }
-                }
+        $('#eventForm').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
             },
-            date: {
-                validators: {
-                    notEmpty: {
-                        message: 'The date is required'
-                    },
-                    date: {
-                        format: 'MM/DD/YYYY',
-                        message: 'The date is not a valid'
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The name is required'
+                        }
+                    }
+                },
+                date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The date is required'
+                        },
+                        date: {
+                            format: 'MM/DD/YYYY',
+                            message: 'The date is not a valid'
+                        }
                     }
                 }
             }
-        }
+        });
     });
-});
 </script>
 {% endblock %}

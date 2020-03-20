@@ -20,12 +20,13 @@
           {% for client in clients %}
           <tr>
           {# {% set client.id = 1 %} #}
-            <th scope="row"><a href="{{ url('listing_mission',{id_client: 1}) }}">{{ client.society }} <br><small>{{ client.name }} {{ client.surname }}</small><a></th>
+            <th scope="row"><a href="{{ url('listing_mission',{id_client: 1}) }}" class="text-info">{{ client.society }} <br><small>{{ client.name }} {{ client.surname }}</small><a></th>
             {# {{ post.id }} #}
-            <td>               
-<button type="submit" class="btn btn-primary btn-sm">
+            <td>   
+             <a href="{{ url('listing_mission',{id_client: 1}) }}">           
+            <button type="submit" class="btn btn-info btn-sm">
                   <i class="far fa-address-card"></i>
-            </button></td>
+            </button></a></td>
             {# {{ post.title }} #}
             <td>
               <a class="btn btn-primary btn-sm" href="">

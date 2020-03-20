@@ -26,7 +26,7 @@ class HistoricController extends AbstractController
     {
         $clients = $repository->findClientsByUserId($id_user); 
         dump($clients);
-        $id_client = $clients->getId();
+        $id_client = 1;
         $missions = $repository2->findMissionsByClientId($id_client);
         return $this->render('historic/index.html.twig', [
             'clients' => $clients,
