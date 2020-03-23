@@ -2,36 +2,36 @@
 {% block title %}{{ parent() }} - Pointeuse{% endblock %}
 
 {% block body %}
-  <form class="d-flex justify-content-center">
-  <fieldset>
-    <legend class="d-flex justify-content-center mb-5">Pointeuse</legend>
-    <div class="form-group">
-    <select class="custom-select">
-      <option selected="">Choisir un client</option>
-      <option value="1">Client1</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <select class="custom-select">
-      <option selected="">Choisir une mission</option>
-      <option value="1">Mission</option>
-    </select>
-  </div>
-    <div class="form-group d-flex justify-content-center mt-5">
-      <button type="button" class="btn btn-info">Lancer/Arrrêter</button>
-    </div>
-    <div class="form-group mt-5">
+<div class="row justify-content-center">
+  <form class="form-group col-3">
+      <legend class="d-flex justify-content-center mb-5">Pointeuse</legend>
       <div class="form-group">
-        <label class="col-form-label" for="ajoutTemps">Ajouter du temps</label>
-        <input type="number" class="form-control" placeholder="ajout Temps" id="ajoutTemps">
-      </div>
+      <select class="custom-select">
+        <option selected="">Choisir un client</option>
+        <option value="1">Client1</option>
+      </select>
     </div>
     <div class="form-group">
-      <div class="form-group">
-        <label class="col-form-label" for="tempsT">Temps total</label>
-        <input type="number" class="form-control" placeholder="temps T" id="tempsT">
-      </div>
+      <select class="custom-select">
+        <option selected="">Choisir une mission</option>
+        <option value="1">Mission</option>
+      </select>
     </div>
-  </fieldset>
-</form>
+      <div class="form-group d-flex justify-content-center mt-5">
+        <button type="button" class="btn btn-info">Lancer/Arrrêter</button>
+      </div>
+      <div class="form-group mt-5">
+        <div class="form-group">
+          <label class="col-form-label" for="ajoutTemps">Ajouter du temps</label>
+          <input type="number" class="form-control" placeholder="ajout Temps" id="ajoutTemps">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-group">
+          <label class="col-form-label" for="tempsT">Temps total</label>
+          <input type="number" class="form-control" placeholder="temps T" id="tempsT">
+        </div>
+      </div>
+    </form>
+</div>
 {% endblock %}

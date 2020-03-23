@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ClientRepository;
 use App\Repository\MissionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -48,4 +49,18 @@ class ListingClientController extends AbstractController
             'clients' => $clients,
         ]);
     }
+
+    /**
+     * @Route("/listing/client/delete/{id<\d+>}", name="client_delete")
+     */
+    public function delete($id,EntityManagerInterface $manager, ClientRepository $repository)
+    {
+ 
+        $client = $repository->find($id); 
+        // dump($client);
+        $manager->remove($client);
+        $manager->flush();
+        return $this->redirectToRoute('listing_client');
+    }
+
 }

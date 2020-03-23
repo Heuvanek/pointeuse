@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Controller;
-
 use App\Repository\ClientRepository;
 use App\Repository\MissionRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 class HistoricController extends AbstractController
 {
     /*
@@ -22,12 +19,16 @@ class HistoricController extends AbstractController
     /**
      * @Route("/historic/{id_user<\d+>}", name="historic")
      */
-    public function historic(ClientRepository $repository, MissionRepository $repository2, $id_user)
-    {
-        $clients = $repository->findClientsByUserId($id_user); 
-        dump($clients);
-        $id_client = 1;
-        $missions = $repository2->findMissionsByClientId($id_client);
+    public function historic(ClientRepository $clientRepository, MissionRepository $missionRepository, $id_user)
+    {   
+        $clients = $clientRepository->findClientsByUserId($id_user); 
+        // dump($clients);
+        // dump(count($clients));
+        for($i = 0; $i<count($clients); $i++){
+            $id_client = $clients[$i]->getId();
+            $missions[$i] = $missionRepository->findMissionsByClientId($id_client);
+        }
+        // dump($missions);
         return $this->render('historic/index.html.twig', [
             'clients' => $clients,
             'missions'=> $missions,

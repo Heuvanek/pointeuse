@@ -1,0 +1,42 @@
+﻿/*!
+ * MonthYearPicker JavaScript Library v1.0.1
+ * http://www.kvcodes.com/
+ *  http://www.kvcodes.com/2018/04/simple-javascript-month-year-picker
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ */
+#CalendarControlIFrame {  display: none;  left: 0px;  position: absolute;  top: 0px;  height: 250px;  width: 250px;  z-index: 99;}
+
+#CalendarControl {  position:absolute;  background-color:#303030;  margin:0;  padding:0;  display:none;  z-index: 100;}
+
+#CalendarControl table {font-size: 8pt;box-shadow: 1em 1em 3em black;}
+
+
+#CalendarControl th a {  font-weight: normal;  text-decoration: none;  color: white;  padding: 1px;}
+
+#CalendarControl td {  text-align: center;}
+
+#CalendarControl .cal_header {  background-color: #3b3b3b;  color:white;  height:30px;}
+
+#CalendarControl .weekday {  background-color: #303030;  color: white;}
+
+#CalendarControl .weekend {  background-color: #303030;  color: white;}
+
+#CalendarControl .current { background-color: #3498db;  color: #FFF; border-radius: 10%;}
+
+#CalendarControl .weekday,#CalendarControl .weekend,#CalendarControl .current {  display: block;  text-decoration: none;  line-height:25px;  padding:8px;}
+
+#CalendarControl .cl_header { text-align:  center; background: #3b3b3b; line-height:25px;} 
+
+#CalendarControl .weekday:hover,#CalendarControl .weekend:hover,#CalendarControl .current:hover {  color: #FFF;  background-color: #3498db; border-radius: 10%;}
+
+#CalendarControl .previous,#CalendarControl .next {  padding: 1px 3px 1px 3px;  font-size: 1.4em;}
+
+#CalendarControl .previous a,#CalendarControl .next a {  color: white;  text-decoration: none;  font-weight: bold;  font-size:14px;}
+#CalendarControl .previous a:hover,#CalendarControl .next a:hover {  color: #3498db;  text-decoration: none;  font-weight: bold;  font-size:14px;}
+
+#CalendarControl .title {  text-align: center;  font-weight: bold;  color: white;  font-size:14px;}
+
+#CalendarControl .empty {  background-color: #3b3b3b;}
+
+
+#dpMonthYear { 	width: calc(100% - 30px);}
