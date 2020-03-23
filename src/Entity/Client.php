@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,26 +19,60 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
+
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
+
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "La société doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
+
      */
     private $society;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "L'email doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  * @Assert\Length(
+     *      min = 0,
+     *      max = 12,
+     *      minMessage = "Le numéro doit comporter au moins {{ limit }} chiffres",
+     *      maxMessage = "trop long, max {{ limit }} chiffres"
+     * )
+
      */
     private $phone;
     /**

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+ 
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-6">
+        {{ form_start(form) }}
+        {{ form_row(form.society, { 'label': 'Société' }) }}
+         {{ form_row(form.surname, { 'label': 'Nom' }) }}
+        {{ form_row(form.name, { 'label': 'Prénom' }) }}
+        {{ form_row(form.mail, { 'label': 'email' }) }}
+        {{ form_row(form.phone, { 'label': 'Téléphone' }) }}
+        {{ form_row(form.id_user, { 'label': ' ' }) }}
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

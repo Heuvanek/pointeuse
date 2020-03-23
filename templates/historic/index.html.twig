@@ -1,5 +1,10 @@
-{% extends 'base.html.twig' %}{% block title %}{{ parent() }} - Historique Mensuel{% endblock %}{% block body %}<link rel="stylesheet" href="{{ asset('css/StyleCalendar.css') }}" />
-<script src="{{ asset('js/CalendarControl.js') }}"></script><div class="d-flex justify-content-center">
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} - Historique Mensuel{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/StyleCalendar.css') }}" />
+<script src="{{ asset('js/CalendarControl.js') }}"></script>
+<div class="d-flex justify-content-center">
     <div class="form-group col-3">
             <i class="far fa-calendar-alt fa-2x position-absolute"  style="right: 0px; top:3px" onclick="showCalendarControl('dpMonthYear');"/></i>
             <input type="text"  class="form-control mr-0" placeholder="Choisir un mois" id="dpMonthYear" onclick="showCalendarControl('dpMonthYear');"/>
