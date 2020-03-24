@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -17,13 +18,19 @@ class User implements UserInterface
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
+   /**
+     * @ORM\Column(type="string", length=255)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "L'email doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
@@ -34,12 +41,26 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
+
      */
     private $forName;
 
-    /**
-     * @ORM\Column(type="string", length=255)
+   /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *  * @Assert\Length(
+     *      min = 2,
+     *      max = 55,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "trop long, max {{ limit }} caractères"
+     * )
+
      */
     private $lastName;
 
@@ -77,7 +98,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }
