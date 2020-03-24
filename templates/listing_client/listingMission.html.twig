@@ -33,7 +33,6 @@
                 <tbody>
                     {% for mission in missions %}
                     <tr>
-                        <a href="{{ url('listing_mission',{id_client: client.id}) }}">
                             <th scope="row">{{ mission.titleMission }}<br>{{ mission.createdAt| date('d-m-Y')}}</th><a>
                                 <td>
                                     {{mission.time}}

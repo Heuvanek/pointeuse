@@ -32,7 +32,7 @@ class NewClientType extends AbstractType
                 'attr' => ['class' => 'btn btn-info btn-lg btn-block'],
             ])
             ->add('id_user', NumberType::class,[
-                'attr' => ['hidden' => 'false', 'value'=> 1],
+                'attr' => ['hidden' => 'true'],
             ])
         ;
     }

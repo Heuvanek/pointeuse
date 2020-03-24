@@ -14,6 +14,7 @@
 </head>
 
 <body>
+{% if is_granted('ROLE_ADMIN') %}
     {% block header %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="{{ url('pointeuse') }}"><img src="{{ asset('img/logosr.png')}}" alt="Le logo de SRDEV"
@@ -34,13 +35,13 @@
                     <a class="nav-link" href="{{ url('new_client') }}">Nouveau client</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('listing_client',{id_user: 1}) }}">Listing clients</a>
+                    <a class="nav-link" href="{{ url('listing_client',{id_user: app.user.id}) }}">Listing clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('historic',{id_user: 1}) }}">Historique mensuel</a>
+                    <a class="nav-link" href="{{ url('historic',{id_user: app.user.id}) }}">Historique mensuel</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Déconnexion</a>
+                    <a class="nav-link" href="{{ url('app_logout') }}">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -50,6 +51,18 @@
         {% block body %}
         {% endblock %}
     </div>
+    {% else %}
+    <div class="d-flex justify-content-center">
+        <div class="col-6 col-sm-4 mt-5">
+            <div class="alert alert-danger">
+            <i class="far fa-grin-beam-sweat"></i>
+                <strong>Bien tenté ! </strong>
+                Vous n'êtes pas autorisé à acceder à cette page, veuillez vous connecter.
+                <a href="{{ url('app_login') }}">Cliquez ici</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     {% block footer %}
     <div class="footer fixed-bottom row">
         <div class="footer-copyright text-center py-3 col-4">
