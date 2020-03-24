@@ -13,7 +13,7 @@ class NewClientController extends AbstractController
     /**
      * @Route("/newclient", name="new_client")
      */
-    public function create(EntityManagerInterface $manager, Request $request, UserId $userId)
+    public function create(EntityManagerInterface $manager, Request $request)
     {
         $client = new Client();
         $form = $this->createForm(NewClientType::class, $client);
@@ -27,7 +27,10 @@ class NewClientController extends AbstractController
         }
         return $this->render('new_client/create.html.twig',[
             'form' => $form->createView(),
-            // 'id' => $user,
        ]);
     }
 }
+
+// UserId $userId
+
+// 'id' => $user,
