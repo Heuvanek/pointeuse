@@ -5,16 +5,11 @@
 <div class="row justify-content-center">
     <div class="col-11 col-sm-6">
       {{ form_start(form) }}
-        {{ form_row(form.society, { 'label': 'Société',
-                                    'value' : ' ' }) }}
-         {{ form_row(form.surname, { 'label': 'Nom',
-                                     'value' : ' '}) }}
-        {{ form_row(form.name, { 'label': 'Prénom',
-                                    'value' : ' ' }) }}
-        {{ form_row(form.mail, { 'label': 'email', 
-                                    'value' : ' ' }) }}
-        {{ form_row(form.phone, { 'label': 'Téléphone', 
-                                    'value' : ' ' }) }}
+        {{ form_row(form.society, { 'label': 'Société'}) }}
+         {{ form_row(form.surname, { 'label': 'Nom'}) }}
+        {{ form_row(form.name, { 'label': 'Prénom'}) }}
+        {{ form_row(form.mail, { 'label': 'email'}) }}
+        {{ form_row(form.phone, { 'label': 'Téléphone'}) }}
         {{ form_row(form.id_user, { 'value' : app.user.id,
                                     'label' : ' ' }) }}
         {{ form_end(form) }}

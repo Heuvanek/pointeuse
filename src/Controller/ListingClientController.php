@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Client;
 use App\Entity\Mission;
 use App\Form\NewClientType;
@@ -66,9 +67,16 @@ class ListingClientController extends AbstractController
         if($this->isCsrfTokenValid('delete-client', $submittedToken)){
             $manager->remove($client);
             $manager->flush();
+            $this->addFlash(
+                'success',
+                'Success'
+            );
+
         }
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('listing_client', [
+                 'id_user' => $client->getIdUser(),
+             ]);
     }
 
        /**
@@ -78,10 +86,12 @@ class ListingClientController extends AbstractController
     {
         $form = $this->createForm(NewClientType::class, $client);
         $form->handleRequest($request);
- 
+        dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
              $manager->flush();
-             return $this->redirectToRoute('home');
+             return $this->redirectToRoute('listing_client', [
+                 'id_user' => $client->getIdUser(),
+             ]);
             
         }
         return $this->render('listing_client/create.html.twig',[
@@ -102,7 +112,29 @@ class ListingClientController extends AbstractController
             $manager->flush();
         }
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('listing_mission', [
+            'id_client' => $mission->getIdClient(),
+        ]);
     }
 
+    /**
+     * @Route("/listing/mission/edit/{id<\d+>}", name="mission_edit")
+     */
+    public function editm(Mission $mission, EntityManagerInterface $manager, Request $request)
+    {
+    //     $form = $this->createForm(NewMissionType::class, $client);
+    //     $form->handleRequest($request);
+ 
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //          $manager->flush();
+    //          return $this->redirectToRoute('listing_mission', [
+    //             'id_client' => $mission->getIdClient(),
+    //         ]);
+            
+    //     }
+    //     return $this->render('listing_mission/create.html.twig',[
+    //         'form' => $form->createView(),
+    //    ]);
+        
+    }
 }
