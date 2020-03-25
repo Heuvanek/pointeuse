@@ -19,7 +19,6 @@ class NewClientController extends AbstractController
         $form = $this->createForm(NewClientType::class, $client);
         $form->handleRequest($request);
 
-        // $user = $this->getUser()->getId(); 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($client);
@@ -30,7 +29,3 @@ class NewClientController extends AbstractController
        ]);
     }
 }
-
-// UserId $userId
-
-// 'id' => $user,

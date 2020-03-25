@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
+use App\Entity\Mission;
+use App\Form\NewClientType;
 use App\Repository\ClientRepository;
 use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,10 +37,12 @@ class ListingClientController extends AbstractController
      * @Route("/listing/mission/{id_client<\d+>}", name="listing_mission")
      */
     public function showMissions(MissionRepository $repository, $id_client){
-        $missions = $repository->findMissionsByClientId($id_client); 
+        $missions = $repository->findMissionsByClientId($id_client);
+        // $clients = $repository2->findClientByUserId($id_user); 
         dump($missions);
         return $this->render('listing_client/listingMission.html.twig', [
             'missions' => $missions,
+            // 'clients'=> $clients,
         ]);
     }
     /** 
@@ -51,16 +57,52 @@ class ListingClientController extends AbstractController
     }
 
     /**
-     * @Route("/listing/client/delete/{id<\d+>}", name="client_delete")
+     * @Route("/listing/client/delete/{id<\d+>}", name="client_delete", methods={"POST"})
      */
-    public function delete($id,EntityManagerInterface $manager, ClientRepository $repository)
+    public function delete(Client $client, EntityManagerInterface $manager, Request $request)
     {
  
-        $client = $repository->find($id); 
-        // dump($client);
-        $manager->remove($client);
-        $manager->flush();
-        return $this->redirectToRoute('listing_client');
+        $submittedToken = $request->request->get('token');
+        if($this->isCsrfTokenValid('delete-client', $submittedToken)){
+            $manager->remove($client);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('home');
+    }
+
+       /**
+     * @Route("/listing/client/edit/{id<\d+>}", name="client_edit")
+     */
+    public function edit(Client $client, EntityManagerInterface $manager, Request $request)
+    {
+        $form = $this->createForm(NewClientType::class, $client);
+        $form->handleRequest($request);
+ 
+        if ($form->isSubmitted() && $form->isValid()) {
+             $manager->flush();
+             return $this->redirectToRoute('home');
+            
+        }
+        return $this->render('listing_client/create.html.twig',[
+            'form' => $form->createView(),
+       ]);
+        
+    }
+
+    /**
+     * @Route("/listing/mission/delete/{id<\d+>}", name="mission_delete", methods={"POST"})
+     */
+    public function deletem(Mission $mission, EntityManagerInterface $manager, Request $request)
+    {
+ 
+        $submittedToken = $request->request->get('token');
+        if($this->isCsrfTokenValid('delete-mission', $submittedToken)){
+            $manager->remove($mission);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('home');
     }
 
 }

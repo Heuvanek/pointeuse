@@ -21,27 +21,21 @@
           <tr>
           {# {% set client.id = 1 %} #}
             <th scope="row"><a href="{{ url('listing_mission',{id_client: client.id}) }}" class="text-info">{{ client.society }} <br><small>{{ client.name }} {{ client.surname }}</small><a></th>
-            {# {{ post.id }} #}
             <td>   
              <a href="{{ url('listing_mission',{id_client: client.id}) }}">           
             <button type="submit" class="btn btn-info btn-sm">
                   <i class="far fa-address-card"></i>
             </button></a></td>
-            {# {{ post.title }} #}
             <td>
-              <a class="btn btn-primary btn-sm" href="">
-                {# {{ path('post_edit',{id: post.id}) }} #}
+              <a class="btn btn-primary btn-sm" href="{{ path('client_edit',{id: client.id}) }}">
                 <i class="fas fa-edit"></i>
               </a>
             </td>
             <td>
-              <form onsubmit="return confirm('Vous êtes sûr de vouloir supprimer le client ?');" action="" method="post">
-                {# {{ path('client_delete',{id: client.id}) }} #}
-                <input type="hidden" name="token" value="" />
-                
+              <form onsubmit="return confirm('Vous êtes sûr de vouloir supprimer le client ?');" action="{{ path('client_delete',{id: client.id}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-client') }}" />
                 <button type="submit" class="btn btn-danger btn-sm">
                   <i class="fas fa-trash-alt"></i>
-                  {# {{ csrf_token('delete-client') }} #}
                 </button>
               </form>
             </td>

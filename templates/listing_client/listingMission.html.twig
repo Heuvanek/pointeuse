@@ -7,13 +7,13 @@
 
 <div class="row text-center mb-4">
     <div class="col-4">
-        <h6>Super société</h6>
+        {# <h6>{{ client.society }}</h6> #}
     </div>
     <div class="col-4">
-        <h6>0442369457</h6>
+        {# <h6>{{ client.phone }}</h6> #}
     </div>
     <div class="col-4">
-        <h6>notresupers@gmail.com</h6>
+        {# <h6>{{ client.mail }}</h6> #}
     </div>
 </div>
 
@@ -44,10 +44,8 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <form onsubmit="return confirm('sur ?');" action="" method="post">
-                                        {# {{ path('post_delete',{id: post.id}) }} #}
-                                        <input type="hidden" name="token" value="" />
-                                        {# {{ csrf_token('delete-post') }} #}
+                                    <form onsubmit="return confirm('sur ?');" action=" {{ path('mission_delete',{id: mission.id}) }}" method="post">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete-mission') }}" />
                                         <button type="submit" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
@@ -65,7 +63,7 @@
         <a href="{{ url('pointeuse') }}"><button type="button"class="small text-btn btn-info btn-lg btn-block">Ajouter une mission</button></a>
     </div>
     <div class="col-4">
-        <a href="#"><button type="button"class="small text-btn btn-info btn-lg btn-block">Imprimer les missions</button></a>
+        <a href="#"><button type="button"class="small text-btn btn-info btn-lg btn-block">Envoyer par mail</button></a>
     </div>
 </div>
 {% endblock %}
