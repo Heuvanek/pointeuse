@@ -69,7 +69,7 @@ class ListingClientController extends AbstractController
             $manager->flush();
             $this->addFlash(
                 'success',
-                'Success'
+                'Le client a été supprimé !'
             );
 
         }
@@ -89,6 +89,10 @@ class ListingClientController extends AbstractController
         dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
              $manager->flush();
+             $this->addFlash(
+                'success',
+                'Le client a bien été modifié !'
+            );
              return $this->redirectToRoute('listing_client', [
                  'id_user' => $client->getIdUser(),
              ]);
@@ -110,6 +114,10 @@ class ListingClientController extends AbstractController
         if($this->isCsrfTokenValid('delete-mission', $submittedToken)){
             $manager->remove($mission);
             $manager->flush();
+            $this->addFlash(
+                'success',
+                'La mission a été supprimé !'
+            );
         }
 
         return $this->redirectToRoute('listing_mission', [
@@ -127,6 +135,10 @@ class ListingClientController extends AbstractController
  
     //     if ($form->isSubmitted() && $form->isValid()) {
     //          $manager->flush();
+    //          $this->addFlash(
+    //             'success',
+    //             'La mission a bien été modifié !'
+    //         );
     //          return $this->redirectToRoute('listing_mission', [
     //             'id_client' => $mission->getIdClient(),
     //         ]);
