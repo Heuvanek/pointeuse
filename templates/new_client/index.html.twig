@@ -1,31 +1,15 @@
-{% extends 'base.html.twig' %}
-{% block title %}{{ parent() }} - Ajouter Client{% endblock %}
+{% extends "base.html.twig" %}
+ 
 {% block body %}
 <div class="row justify-content-center">
-  <form class="form-group col-3">
-    <div class="form-group">
-        <label class="col-form-label" for="tempsT">Société</label>
-        <input type="text" class="form-control" placeholder="Société T" id="societe">
-      </div>
-    <div class="form-group">
-        <label class="col-form-label" for="tempsT">Nom</label>
-        <input type="text" class="form-control" placeholder="Nom" id="nom">
-      </div>
-    <div class="form-group">
-        <label class="col-form-label" for="tempsT">Prénom</label>
-        <input type="text" class="form-control" placeholder="Prénom" id="prenom">
-      </div>
-    <div class="form-group">
-        <label class="col-form-label" for="tempsT">Téléphone</label>
-        <input type="text" class="form-control" placeholder="Téléphone" id="tel">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Adresse email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      </div>
-      <div>
-          <button type="button" class="btn btn-info btn-lg btn-block">Ajouter</button>
-      </div>
-    </form>
+    <div class="col-11 col-sm-6 ">
+      {{ form_start(form) }}
+      {{ form_row(form.society, { 'label': 'Société'}) }}
+      {{ form_row(form.firstName, { 'label': 'Prénom'}) }}
+      {{ form_row(form.lastName, { 'label': 'Nom'}) }}
+      {{ form_row(form.email, { 'label': 'email'}) }}
+      {{ form_row(form.phone, { 'label': 'Téléphone'}) }}
+      {{ form_end(form) }}
+    </div>
 </div>
 {% endblock %}

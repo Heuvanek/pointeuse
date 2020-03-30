@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+ 
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-11 col-sm-6">
+      {{ form_start(form) }}
+      {{ form_row(form.clientId, { 'label': 'Société'}) }}
+      {{ form_row(form.titleMission, { 'label': 'Nom de la mission'}) }}
+      {{ form_row(form.chrono, { 'label': 'Temps total'}) }}
+      {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

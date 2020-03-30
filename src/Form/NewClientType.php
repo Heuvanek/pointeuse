@@ -2,13 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class NewClientType extends AbstractType
@@ -17,24 +17,26 @@ class NewClientType extends AbstractType
     {
 
         $builder
-            ->add('society',TextType::class, [
-                'label_attr'=>['class'=>'text-info'],
-                'attr' => ['class' => 'ckeditor'],
+            ->add('society', TextType::class, [
+                'label_attr' => ['class' => 'text-info'],
+                'attr' => ['class' => 'ckeditor', 'class' => 'relief'],
             ])
-            ->add('name')
-            ->add('surname')
-            ->add('mail',EmailType::class,[
-                'attr' => ['type' => 'email', 'pattern' => '.+@+.+'],
+            ->add('firstName', TextType::class, [
+                'attr' => ['class' => 'relief'],
             ])
-            ->add('phone')
-            ->add('submit',SubmitType::class, [
-                'label' =>'Ajouter',
-                'attr' => ['class' => 'btn btn-info btn-lg btn-block'],
+            ->add('lastName', TextType::class, [
+                'attr' => ['class' => 'relief'],
             ])
-            ->add('id_user', NumberType::class,[
-                'attr' => ['hidden' => 'true'],
+            ->add('email', EmailType::class, [
+                'attr' => ['type' => 'email', 'pattern' => '.+@+.+', 'class' => 'relief'],
             ])
-        ;
+            ->add('phone', TextType::class, [
+                'attr' => ['class' => 'relief'],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Ajouter',
+                'attr' => ['class' => 'btn btn-info btn-lg btn-block relief'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -22,15 +22,12 @@ class SecurityController extends AbstractController
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-
     /**
      * @Route("/logout", name="app_logout")
      */
@@ -41,23 +38,21 @@ class SecurityController extends AbstractController
     /**
      * @Route("/newaccount", name="app_newuser")
      */
-    public function create(EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $encoder){
- 
+    public function create(EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $encoder)
+    {
         $user = new User();
         $form = $this->createForm(NewUserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(['ROLES_ADMIN']);
             $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('app_login');
-    }
-
-        return $this->render('security/create.html.twig',[
-             'form' => $form->createView(),
+        }
+        return $this->render('security/create.html.twig', [
+            'form' => $form->createView(),
         ]);
-     }
- 
+    }
 }

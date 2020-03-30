@@ -5,29 +5,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" />
-    {% block stylesheets %} {% endblock %}
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" /> {% block stylesheets %} {% endblock %}
 </head>
 
 {% block body %}
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
-    <a class="navbar-brand" href="{{ url('app_login') }}"><img src="{{ asset('img/logosr.png')}}" alt="Le logo de SRDEV"
-                class="logo-base"></a>
+    <a class="navbar-brand" href="{{ url('app_login') }}"><img src="{{ asset('img/logosr.png')}}" alt="Le logo de SRDEV" class="logo-base"></a>
 </nav>
 <div class="row justify-content-center mt-5">
     <div class="col-11 col-sm-6">
-      {{ form_start(form) }}
-        {{ form_row(form.forName, { 'label': 'Prénom',
-                                    'value' : ' ' }) }}
-         {{ form_row(form.lastName, { 'label': 'Nom',
-                                     'value' : ' '}) }}
-        {{ form_row(form.email, { 'label': 'email', 
-                                    'value' : ' ' }) }}
-        {{ form_row(form.password, { 'label': 'Mot de passe', 
-                                    'value' : ' ' }) }}
-        {# {{ form_row(form.roles, { 'value' : ' ',
-                                    'label' : ' ' }) }} #}
-        {{ form_end(form) }}
+        {{ form_start(form) }} {{ form_row(form.firstName, { 'label': 'Prénom', 'value' : ' ' }) }} {{ form_row(form.lastName, { 'label': 'Nom', 'value' : ' '}) }} {{ form_row(form.email, { 'label': 'email', 'value' : ' ' }) }} {{ form_row(form.password, { 'label':
+        'Mot de passe', 'value' : ' ' }) }} {# {{ form_row(form.roles, { 'value' : ' ', 'label' : ' ' }) }} #} {{ form_end(form) }}
     </div>
 </div>
 {% block footer %}
@@ -41,15 +29,9 @@
     <div class="footer-copyright text-center py-3 col-4">
         <a href="https://srdev.fr/" class="text-info">Mentions légales</a>
     </div>
-</div> {% endblock %}
-{% endblock %}
+</div> {% endblock %} {% endblock %}
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-{% block javascripts %}
-{% endblock %}
+{% block javascripts %} {% endblock %}

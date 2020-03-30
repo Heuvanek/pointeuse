@@ -16,20 +16,22 @@ class NewUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class,[
-                'attr' => ['type' => 'email', 'pattern' => '.+@+.+'],
+            ->add('email', EmailType::class, [
+                'attr' => ['type' => 'email', 'pattern' => '.+@+.+', 'class' => 'relief'],
             ])
-            ->add('password', PasswordType::class)
-            ->add('forName')
-            ->add('lastName')
-            // ->add('roles', TextType::class,[
-            //     'attr' => ['hidden' => 'true'],
-            // ])
-            ->add('submit',SubmitType::class, [
-                'label' =>'Créer un compte',
-                'attr' => ['class' => 'btn btn-info btn-lg btn-block'],
+            ->add('password', PasswordType::class, [
+                'attr' => ['class' => 'relief'],
             ])
-        ;
+            ->add('firstName', TextType::class, [
+                'attr' => ['class' => 'relief'],
+            ])
+            ->add('lastName', TextType::class, [
+                'attr' => ['class' => 'relief'],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Créer un compte',
+                'attr' => ['class' => 'btn btn-info btn-lg btn-block relief'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

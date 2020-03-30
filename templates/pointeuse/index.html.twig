@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %} {% block title %}{{ parent() }} - Pointeuse{% endblock %} {% block body %}
+<div class="row justify-content-center ">
+    <form class="form-group col-11 col-md-6 col-sm-9" id="formChrono">
+        <legend class="d-flex justify-content-center mb-1">Pointeuse</legend>
+        <div class="form-group">
+            <h5><span class="text-info font-weight-bolder text-capitalize"><u>Société du client </u></span> : {{ client.society }} <br><small>{{ client.firstName }} {{ client.lastName }}</h5>
+        </div>
+        <div class="form-group">
+            <h5><span class="text-info font-weight-bolder text-capitalize"><u>Nom de la mission </u></span>:
+                {{ mission.titleMission }}</h5>
+        </div>
+        <div class="shadow-light bg-info form-group d-flex justify-content-center mt-4 rounded-circle"
+            style="width:86px; height:86px; margin:auto">
+            <div class="shadow-light bg-dark form-group d-flex justify-content-center rounded-circle pt-1"
+                style="width:83px; height:83px; margin:auto">
+                <div class="relief shadow-light bg-secondary rounded-circle text-center pt-4  text-danger align-middle relief"
+                    id="divChrono" style="width:75px; height:75px;"><span
+                        class="align-middle mt-5 pt-1 h5">00:00:00</span><br><small>00</small>
+        </div>
+</div>
+</div>
+<div class="form-group d-flex justify-content-center mt-5">
+    <input type="button" id="bStart" value="Démarrer" onClick="fStart()" class="relief btn btn-info mr-5" />
+    <input type="button" id="bStop" value="Arrêter" onClick="fStop()" class="relief  btn btn-info ml-5" /><br>
+</div>
+<div class="row">
+    <div class="form-group mt-5 col-3">
+        <div class="form-group">
+            <input type="number" class="form-control relief" placeholder="ajout Temps" id="ajoutTemps">
+        </div>
+    </div>
+    <div class="form-group mt-5 col-1">
+        <div class="form-group">
+            <strong class="h6 h4-md">H</strong>
+        </div>
+    </div>
+    <div class="form-group mt-5 col-3">
+        <div class="form-group">
+            <input type="number" class="form-control relief" placeholder="ajout Temps" id="ajoutTemps">
+        </div>
+    </div>
+    <div class="form-group mt-5 col-1">
+        <div class="form-group">
+            <strong class="h6 h4-md">M</strong>
+        </div>
+    </div>
+    <div class="form-group mt-5 col-3">
+        <div class="form-group">
+            <input type="number" class="form-control relief" placeholder="ajout Temps" id="ajoutTemps">
+        </div>
+    </div>
+    <div class="form-group mt-5 col-1">
+        <div class="form-group">
+            <strong class="h6 h4-md">S</strong>
+        </div>
+    </div>
+
+    <!-- Fin de Row ajouter temps -->
+</div>
+
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-info h6 text-border-dark relief"> Ajouter le temps indiqué
+                </button>
+</div>
+<h4 class="text-center">Temps total</h4>
+<div class="d-flex justify-content-center">
+    <p type="button" class="btn btn-secondary btn-lg h3 text-danger text-border-dark relief mb-5">°·.¸.·°¯°·.¸.-> {{ mission.chrono | date('h:m:s') }}
+        <-.¸.·°¯°·.¸.·°</p>
+</div>
+</form>
+</div>
+<!-- Script du chronomètre -->
+<script language="JavaScript">
+    var setTm = 0;
+    var tmStart = 0;
+    var tmNow = 0;
+    var tmInterv = 0;
+    var tTime = []; //tableau des temps intermédiaires (lap)
+    var nTime = 0; //compteur des temps intermédiaires
+    function affTime(tm) { //affichage du compteur
+        var vHou = tm.getHours() - 1;
+        var vMin = tm.getMinutes();
+        var vSec = tm.getSeconds();
+        var vMil = Math.round((tm.getMilliseconds()) / 10); //arrondi au centième
+        if (vHou < 10) {
+            vHou = "0" + vHou;
+        }
+        if (vMin < 10) {
+            vMin = "0" + vMin;
+        }
+        if (vSec < 10) {
+            vSec = "0" + vSec;
+        }
+        if (vMil < 10) {
+            vMil = "0" + vMil;
+        }
+        document.getElementById("divChrono").innerHTML = "<span class= 'align-middle mt-5 pt-1 h5'>" + vHou + ":" + vMin + ":" + vSec + "<br/><small>" + vMil + "</small></span>";
+    }
+
+    function fChrono() {
+        tmNow = new Date();
+        Interv = tmNow - tmStart;
+        tmInterv = new Date(Interv);
+        affTime(tmInterv);
+    }
+
+    function fStart() {
+        fStop();
+        if (tmInterv == 0) {
+            tmStart = new Date();
+        } else { //si on repart après un clic sur Stop
+            tmNow = new Date();
+            Pause = tmNow - tmInterv;
+            tmStart = new Date(Pause);
+        }
+        setTm = setInterval(fChrono, 10); //lancement du chrono tous les centièmes de secondes
+    }
+
+    function fStop() {
+        clearInterval(setTm);
+        tTime[nTime] = tmInterv;
+    }
+</script>
+
+{% endblock %}

@@ -27,14 +27,15 @@ class Mission
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="time", nullable=true)
      */
-    private $time;
+    private $chrono;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="missions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_client;
+    private $clientId;
 
     public function getId(): ?int
     {
@@ -65,26 +66,26 @@ class Mission
         return $this;
     }
 
-    public function getTime(): ?string
+    public function getChrono(): ?\DateTimeInterface
     {
-        return $this->time;
+        return $this->chrono;
     }
 
-    public function setTime(string $time): self
+    public function setChrono(?\DateTimeInterface $chrono): self
     {
-        $this->time = $time;
+        $this->chrono = $chrono;
 
         return $this;
     }
 
-    public function getIdClient(): ?int
+    public function getClientId(): ?Client
     {
-        return $this->id_client;
+        return $this->clientId;
     }
 
-    public function setIdClient(int $id_client): self
+    public function setClientId(?Client $clientId): self
     {
-        $this->id_client = $id_client;
+        $this->clientId = $clientId;
 
         return $this;
     }

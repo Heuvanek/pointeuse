@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -18,14 +22,8 @@ class User implements UserInterface
      */
     private $id;
 
-   /**
-     * @ORM\Column(type="string", length=255)
-     *  * @Assert\Length(
-     *      min = 2,
-     *      max = 55,
-     *      minMessage = "L'email doit comporter au moins {{ limit }} caractères",
-     *      maxMessage = "trop long, max {{ limit }} caractères"
-     * )
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
@@ -39,30 +37,40 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  * @Assert\Length(
      *      min = 2,
      *      max = 55,
      *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères",
-     *      maxMessage = "trop long, max {{ limit }} caractères"
+     *      maxMessage = "Prénom trop long, max {{ limit }} caractères"
      * )
 
      */
-    private $forName;
+    private $firstName;
 
-   /**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  * @Assert\Length(
      *      min = 2,
      *      max = 55,
      *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
-     *      maxMessage = "trop long, max {{ limit }} caractères"
+     *      maxMessage = "Nom trop long, max {{ limit }} caractères"
      * )
 
      */
     private $lastName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Client", mappedBy="userId", orphanRemoval=true)
+     */
+    private $clients;
+
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -88,7 +96,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) ucfirst($this->forName).''.ucfirst($this->lastName);
+        return (string) ucfirst($this->firstName) . '' . ucfirst($this->lastName);
     }
 
     /**
@@ -141,15 +149,14 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-    public function getForName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->forName;
+        return $this->firstName;
     }
 
-    public function setForName(string $forName): self
+    public function setFirstName(?string $firstName): self
     {
-        $this->forName = $forName;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -159,9 +166,40 @@ class User implements UserInterface
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Client[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->contains($client)) {
+            $this->clients->removeElement($client);
+            // set the owning side to null (unless already changed)
+            if ($client->getUserId() === $this) {
+                $client->setUserId(null);
+            }
+        }
 
         return $this;
     }

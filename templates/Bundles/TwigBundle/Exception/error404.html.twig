@@ -1,0 +1,11 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Page non trouvée : Erreur 404</h1>
+
+    <p>
+        La page demandé ne peut pas être localisée. Vérifiez que l'URL
+        ne comporte pas d'erreur ou <a href="{{ path('login') }}">return to the homepage</a>.
+    </p>
+{% endblock %}

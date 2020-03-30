@@ -12,17 +12,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home/home.html.twig', [
-
-        ]);
-    }
-    /**
-     * @Route("/pointeuse", name="pointeuse")
-     */
-    public function pointeuse()
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'Pointeuse',
-        ]);
+        return $this->render('home/index.html.twig', []);
     }
 }

@@ -22,17 +22,20 @@ class MissionRepository extends ServiceEntityRepository
     // /**
     //  * @return Mission[] Returns an array of Mission objects
     //  */
-    public function findMissionsByClientId($id_client)
+    /*
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.id_client = :val')
-            ->setParameter('val', $id_client)
-            ->orderBy('m.id', 'DESC')
+            ->andWhere('m.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('m.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
+    */
+
     /*
     public function findOneBySomeField($value): ?Mission
     {

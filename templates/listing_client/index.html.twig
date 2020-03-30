@@ -1,53 +1,48 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{ parent() }} - Liste Clients{% endblock %}
-
-{% block body %}
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
+{% extends 'base.html.twig' %} {% block title %}{{ parent() }} - Liste Clients{% endblock %} {% block body %} {% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
 {% endfor %}
 <div class="row">
-  <div class="col-12 pt-4">
-    <div class="table-responsive">
-      <table class="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Société</th>
-            <th scope="col">Profil</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for client in clients %}
-          <tr>
-          {# {% set client.id = 1 %} #}
-            <th scope="row"><a href="{{ url('listing_mission',{id_client: client.id}) }}" class="text-info">{{ client.society }} <br><small>{{ client.name }} {{ client.surname }}</small><a></th>
+    <div class="col-12 pt-4">
+        <div class="table-responsive">
+
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th class="txtshadowsombre" scope="col">Société</th>
+                        <th class="txtshadowsombre" scope="col">Profil/Missions</th>
+                        <th class="txtshadowsombre" scope="col">Edit</th>
+                        <th class="txtshadowsombre" scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <th scope="row"><a href="{{ url('listing_mission',{clientId: client.id}) }}" class="text-info txtshadowlight">{{ client.society }} <br><small>{{ client.firstName }} {{ client.lastName }}</small><a></th>
             <td>   
-             <a href="{{ url('listing_mission',{id_client: client.id}) }}">           
-            <button type="submit" class="btn btn-info btn-sm">
+             <a href="{{ url('listing_mission',{clientId: client.id}) }}">           
+            <button type="submit" class="btn btn-info btn-sm relief">
                   <i class="far fa-address-card"></i>
             </button></a></td>
-            <td>
-              <a class="btn btn-primary btn-sm" href="{{ path('client_edit',{id: client.id}) }}">
-                <i class="fas fa-edit"></i>
-              </a>
-            </td>
-            <td>
-              <form onsubmit="return confirm('Vous êtes sûr de vouloir supprimer le client ?');" action="{{ path('client_delete',{id: client.id}) }}" method="post">
-                <input type="hidden" name="token" value="{{ csrf_token('delete-client') }}" />
-                <button type="submit" class="btn btn-danger btn-sm">
+                            <td>
+                                <a class="btn btn-warning btn-sm relief " href="{{ path('edit_client',{clientId: client.id}) }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form onsubmit="return confirm('Vous êtes sûr de vouloir supprimer le client ?');" action="{{ path('delete_client',{clientId: client.id}) }}" method="post">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete_client') }}" />
+                                    <button type="submit" class="btn btn-danger btn-sm relief">
                   <i class="fas fa-trash-alt"></i>
                 </button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+                                </form>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}
